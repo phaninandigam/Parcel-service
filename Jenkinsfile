@@ -1,8 +1,8 @@
 pipeline {
-    agent any
+    agent { label 'slave1' }
 
     environment {
-        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+        JAVA_HOME = '/usr/lib/jvm/java-21-openjdk-amd64'
         MAVEN_HOME = '/usr/share/maven'
         PATH = "${JAVA_HOME}/bin:${MAVEN_HOME}/bin:${env.PATH}"
     }
@@ -15,11 +15,11 @@ pipeline {
             }
         }
 
-        stage('Set up Java 17') {
+        stage('Set up Java 21') {
             steps {
-                echo 'Setting up Java 17...'
+                echo 'Setting up Java 21...'
                 sh 'sudo apt update'
-                sh 'sudo apt install -y openjdk-17-jdk'
+                sh 'sudo apt install -y openjdk-21-jdk'
             }
         }
 
@@ -74,10 +74,10 @@ pipeline {
             }
         }
 
-        stage('Wait for 5 minutes') {
+        stage('Wait for 2 minutes') {
             steps {
-                echo 'Waiting for 5 minutes...'
-                sleep(time: 5, unit: 'MINUTES')  // Wait for 5 minutes
+                echo 'Waiting for 2 minutes...'
+                sleep(time: 2, unit: 'MINUTES')  // Wait for 5 minutes
             }
         }
 
